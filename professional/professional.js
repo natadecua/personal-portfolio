@@ -2,31 +2,20 @@
 $(document).ready(function() {
     // Function to load content
     function loadContent(tab) {
-        if (tab === 'article4') {
-            // Use fetch for article4 to demonstrate AJAX request
-            fetch('http://localhost:4000/article4')
-                .then(response => response.text())
-                .then(data => {
-                    $("#content").html(data);
-                    // Initialize tooltips
-                    $('[data-bs-toggle="tooltip"]').tooltip();
-                })
-                .catch(error => {
-                    console.error('Error loading content:', error);
-                    $("#content").html('<p>Error loading content.</p>');
-                });
-        } 
-        else {
-            // Use jQuery's load method for other tabs
-            $("#content").load(tab + ".html #content", function() {
+        // Load all content as static HTML files
+        $("#content").load(tab + ".html #content", function(response, status, xhr) {
+            if (status == "error") {
+                console.error('Error loading content:', xhr.status, xhr.statusText);
+                $("#content").html('<p>Error loading content.</p>');
+            } else {
                 // Initialize tooltips
                 $('[data-bs-toggle="tooltip"]').tooltip();
 
                 if(tab === 'article3'){
                     initializeCalculator();
                 }
-            });
-        }
+            }
+        });
     }
 
     
@@ -175,7 +164,7 @@ $(document).ready(function() {
 
 
     // Initial load
-    loadContent("portfolio");
+    loadContent("career");
 
     // Handle tab clicks
     $("#professionalTabs .nav-link").on("click", function(event) {

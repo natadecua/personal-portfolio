@@ -40,3 +40,6 @@ This repository contains the source code for my portfolio website. It showcases 
 - **Charts**: Google Charts
 - **File Uploads**: Multer
 - **Authentication**: LocalStorage-based login system
+
+## Deployment
+Hosted on GitHub Pages at [https://whatthetree.me](https://whatthetree.me)
